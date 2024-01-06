@@ -1,0 +1,31 @@
+.inputele {
+  width: 10vw;
+  margin-left: 30%;
+}
+
+.label {
+  font-size: 22px;
+  font-weight: 500;
+  margin-left: 25%;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+h1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgb(236, 81, 81);
+  text-align: center;
+}
+.tabel {
+  margin-left: 34%;
+  margin-top: 3%;
+}
+.d-flex {
+  margin-top: 3%;
+}
+h2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-left: 15%;
+}
+.custom-table th,
+.custom-table td {
+  padding: 10px;
+}
