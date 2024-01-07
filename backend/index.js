@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const expenseRouter = require("./expenseRouter");
-const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
 app.use(cors());
@@ -16,7 +15,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-app.use("/user", userRouter);
 app.use("/", expenseRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

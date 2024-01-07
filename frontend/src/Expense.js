@@ -41,10 +41,7 @@ function Expense() {
       }
 
       if (response.status === 201 || response.status === 200) {
-        setExpenses((prevExpenses) => [
-          ...prevExpenses,
-          response.data.newExpense,
-        ]);
+        await fetchExpenses();
         setReason("");
         setAmount("");
         setDate("");
@@ -96,7 +93,9 @@ function Expense() {
 
   return (
     <div>
-      <h1>Expense Tracker</h1>
+      <div className="signout">
+        <h1>Expense Tracker</h1>
+      </div>
       <Form>
         <Form.Group className="mb-3">
           <Form.Label className="label">Reason</Form.Label>
@@ -151,7 +150,7 @@ function Expense() {
           <tbody>
             {expenses &&
               expenses.map((expense) => (
-                <tr key={expense._id}>
+                <tr key={expense?._id}>
                   <td>{expense && expense.reason}</td>
                   <td>{expense && `$${expense.amount}`}</td>
                   <td>
@@ -160,7 +159,7 @@ function Expense() {
                   <td>
                     <Button
                       variant="secondary"
-                      onClick={() => editExpense(expense._id)}
+                      onClick={() => editExpense(expense?._id)}
                     >
                       Edit
                     </Button>
@@ -168,7 +167,7 @@ function Expense() {
                   <td>
                     <Button
                       variant="danger"
-                      onClick={() => deleteExpense(expense._id)}
+                      onClick={() => deleteExpense(expense?._id)}
                     >
                       Delete
                     </Button>
