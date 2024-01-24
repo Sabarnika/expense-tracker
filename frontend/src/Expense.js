@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { Store } from "./Store";
 function Expense() {
+  const navigate=useNavigate();
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const [reason, setReason] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  const { userDetails } = state;
   const [expenses, setExpenses] = useState([]);
   const [editingExpenseId, setEditingExpenseId] = useState(null);
-
   const addOrUpdateExpense = async (e) => {
     e.preventDefault();
-
     if (!reason || !amount || !date) {
       console.error("Please fill in all fields");
       return;
     }
-
     try {
       let response;
-
       if (editingExpenseId) {
         // Update expense
         response = await axios.put(
-          `http://localhost:5000/update/${editingExpenseId}`,
+          `http://localhost:5000/expense-tracker/update/${editingExpenseId}`,
           {
             reason: reason,
             amount: parseFloat(amount),
@@ -33,7 +35,7 @@ function Expense() {
         );
       } else {
         // Add new expense
-        response = await axios.post("http://localhost:5000/create", {
+        response = await axios.post("http://localhost:5000/expense-tracker/create", {
           reason: reason,
           amount: parseFloat(amount),
           date: new Date(date),
@@ -56,7 +58,7 @@ function Expense() {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/fetch");
+      const response = await axios.get("http://localhost:5000/expense-tracker/fetch");
       setExpenses(response.data.expenses);
     } catch (err) {
       console.error(err);
@@ -65,7 +67,7 @@ function Expense() {
 
   const deleteExpense = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/delete/${id}`);
+      const response = await axios.delete(`http://localhost:5000/expense-tracker/delete/${id}`);
       if (response.status === 200) {
         fetchExpenses();
       } else {
@@ -75,10 +77,8 @@ function Expense() {
       console.error(err);
     }
   };
-
   const editExpense = (id) => {
     const expenseToEdit = expenses.find((expense) => expense._id === id);
-
     if (expenseToEdit) {
       setReason(expenseToEdit.reason);
       setAmount(expenseToEdit.amount.toString());
@@ -86,15 +86,20 @@ function Expense() {
       setEditingExpenseId(id);
     }
   };
-
   useEffect(() => {
     fetchExpenses();
   }, []);
-
+  const logoutHandler = () => {
+    navigate("/");
+    localStorage.removeItem("userDetails");
+    ctxDispatch({ type: "SIGN_OUT" });
+    toast.success(userDetails.user.name + " signed out successfully");
+  };
   return (
     <div>
       <div className="signout">
         <h1>Expense Tracker</h1>
+        <button className="btn btn-primary" onClick={logoutHandler}>Log Out</button>
       </div>
       <Form>
         <Form.Group className="mb-3">

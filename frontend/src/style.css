@@ -36,25 +36,17 @@ h2 {
 .custom-table td {
   padding: 10px;
 }
-.signin-container,
-.signup-container {
-  width: 450px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  flex-direction: column;
-  background: rgb(111, 206, 195);
-  color: #262626;
-  border-radius: 10px;
-  padding: 40px 50px;
-  margin-top: 10%;
-}
 .signin-container-header {
   font-size: 32px;
   color: rgb(114, 0, 0);
 }
 .input-fields {
   margin: 10px;
+}
+.signout button
+{
+ border-radius: 10px;
+ padding: 5ox;
 }
 .input-fields label {
   font-size: 20px;

@@ -1,0 +1,23 @@
+.login-container
+{
+    margin-left: 30%;
+    margin-top: 10%;
+}
+.login-container label
+{
+    padding: 10px;
+}
+.signup-container
+{
+    margin-left: 30%;
+}
+.signup-container label,h4
+{
+    padding: 6px;
+}
+h1
+{
+    color: blue;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-left: 20%;
+}

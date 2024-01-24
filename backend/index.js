@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const expenseRouter = require("./expenseRouter");
+const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
 app.use(cors());
@@ -15,7 +16,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-app.use("/", expenseRouter);
+app.use("/user",userRouter);
+app.use("/expense-tracker", expenseRouter);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
