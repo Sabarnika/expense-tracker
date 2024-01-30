@@ -1,7 +1,7 @@
 import React, { useState, useEffect,useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+import Axios from "axios"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
@@ -23,9 +23,9 @@ function Expense() {
     }
     try {
       let response;
-      if (editingExpenseId) {
+     if (editingExpenseId) {
         // Update expense
-        response = await axios.put(
+        response = await Axios.put(
           `http://localhost:5000/expense-tracker/update/${editingExpenseId}`,
           {
             reason: reason,
@@ -34,12 +34,14 @@ function Expense() {
           }
         );
       } else {
+        const userId=userDetails.user._id;
         // Add new expense
-        response = await axios.post("http://localhost:5000/expense-tracker/create", {
+        response = await Axios.post(`http://localhost:5000/expense-tracker/create/${userId}`, {
           reason: reason,
           amount: parseFloat(amount),
           date: new Date(date),
         });
+        localStorage.setItem("expenses", JSON.stringify(response.data));
       }
 
       if (response.status === 201 || response.status === 200) {
@@ -55,19 +57,18 @@ function Expense() {
       console.error(err);
     }
   };
-
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/expense-tracker/fetch");
-      setExpenses(response.data.expenses);
+      const userId = userDetails.user._id;
+      const { data } = await Axios.get(`http://localhost:5000/expense-tracker/fetch/${userId}`);
+      setExpenses(data.expenses); // Destructure data.expenses
     } catch (err) {
       console.error(err);
     }
-  };
-
+  };  
   const deleteExpense = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/expense-tracker/delete/${id}`);
+      const response = await Axios.delete(`http://localhost:5000/expense-tracker/delete/${id}`);
       if (response.status === 200) {
         fetchExpenses();
       } else {
@@ -92,6 +93,7 @@ function Expense() {
   const logoutHandler = () => {
     navigate("/");
     localStorage.removeItem("userDetails");
+    localStorage.removeItem("expenses")
     ctxDispatch({ type: "SIGN_OUT" });
     toast.success(userDetails.user.name + " signed out successfully");
   };

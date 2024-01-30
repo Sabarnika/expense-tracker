@@ -39,7 +39,7 @@ userRoute.post(
       "+password"
     );
 
-    console.log(user);
+   // console.log(user);
     if (!user) {
       res.status(404).send({ message: "Account not found!" });
       return;

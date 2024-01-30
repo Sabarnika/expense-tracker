@@ -32,7 +32,7 @@ function Signin() {
       const { data } = await Axios.post("http://localhost:5000/user/sign-in", {
         email,
         password: pass,
-      });
+      }); 
       localStorage.setItem("userDetails", JSON.stringify(data));
       ctxDispatch({ type: "SIGN_IN", payload: data });
       toast.success(data.user.name + " signed up successfully");

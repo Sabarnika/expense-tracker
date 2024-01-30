@@ -2,8 +2,9 @@ const express = require("express");
 const Expense = require("./expenseSchema");
 const mongoose = require("mongoose");
 const expenseRouter = express.Router();
-expenseRouter.post("/create", async (req, res) => {
+expenseRouter.post("/create/:id", async (req, res) => {
   const expense = new Expense({
+    userId:req.params.id,
     reason: req.body.reason,
     amount: req.body.amount,
     date: req.body.date,
@@ -16,12 +17,13 @@ expenseRouter.post("/create", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-expenseRouter.get("/fetch", async (req, res) => {
+expenseRouter.get("/fetch/:userId", async (req, res) => {
   try {
-    const expenses = await Expense.find({});
+    const userId = req.params.userId;
+    const expenses = await Expense.find({ userId }); 
     res.status(200).json({ expenses });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

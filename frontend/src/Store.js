@@ -10,6 +10,9 @@ const initialState = {
   userDetails: localStorage.getItem("userDetails")
     ? JSON.parse(localStorage.getItem("userDetails"))
     : null,
+    expenses: localStorage.getItem("expenses")
+    ? JSON.parse(localStorage.getItem("expenses"))
+    : [],
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -21,6 +24,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         userDetails: null,
+        expenses:[]
       };
     default:
       return state;
