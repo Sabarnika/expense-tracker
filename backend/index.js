@@ -6,7 +6,12 @@ const expenseRouter = require("./expenseRouter");
 const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
-app.use(cors());
+app.use(cors(
+  {
+    origin:"https://expense-tracker-mern-kohl.vercel.app/",
+    methods:["GET","POST","PUT","DELETE"],
+  }
+));
 app.use((req,res,next)=>{
   res.header("Access-Control-Allow-Origin","*")
   next()
