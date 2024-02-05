@@ -7,7 +7,10 @@ const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
 app.use(cors({
-  origin: 'https://expense-tracker-two-alpha.vercel.app/user/sign-in','https://expense-tracker-two-alpha.vercel.app/user/sign-up,
+  origin: [
+    'https://expense-tracker-two-alpha.vercel.app/user/sign-in',
+    'https://expense-tracker-two-alpha.vercel.app/user/sign-up',
+  ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
