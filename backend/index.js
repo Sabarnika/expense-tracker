@@ -7,7 +7,7 @@ const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
 const corsOptions = {
-  origin: ["https://expense-tracker-mern-stack.vercel.app"],
+  origin: ["https://expense-tracker-mern-kohl.vercel.app/"],
   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
   optionsSuccessStatus: 204,
