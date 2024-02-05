@@ -26,7 +26,7 @@ function Expense() {
      if (editingExpenseId) {
         // Update expense
         response = await Axios.put(
-          `http://localhost:5000/expense-tracker/update/${editingExpenseId}`,
+          `https://expense-tracker-two-alpha.vercel.app/expense-tracker/update/${editingExpenseId}`,
           {
             reason: reason,
             amount: parseFloat(amount),
@@ -36,7 +36,7 @@ function Expense() {
       } else {
         const userId=userDetails.user._id;
         // Add new expense
-        response = await Axios.post(`http://localhost:5000/expense-tracker/create/${userId}`, {
+        response = await Axios.post(`https://expense-tracker-two-alpha.vercel.app/expense-tracker/create/${userId}`, {
           reason: reason,
           amount: parseFloat(amount),
           date: new Date(date),
@@ -60,7 +60,7 @@ function Expense() {
   const fetchExpenses = async () => {
     try {
       const userId = userDetails.user._id;
-      const { data } = await Axios.get(`http://localhost:5000/expense-tracker/fetch/${userId}`);
+      const { data } = await Axios.get(`https://expense-tracker-two-alpha.vercel.app/expense-tracker/fetch/${userId}`);
       setExpenses(data.expenses); // Destructure data.expenses
     } catch (err) {
       console.error(err);
@@ -68,7 +68,7 @@ function Expense() {
   };  
   const deleteExpense = async (id) => {
     try {
-      const response = await Axios.delete(`http://localhost:5000/expense-tracker/delete/${id}`);
+      const response = await Axios.delete(`https://expense-tracker-two-alpha.vercel.app/expense-tracker/delete/${id}`);
       if (response.status === 200) {
         fetchExpenses();
       } else {
