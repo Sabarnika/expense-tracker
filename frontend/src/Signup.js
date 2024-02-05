@@ -38,7 +38,7 @@ function Signup() {
         try {
           dispatch({ type: "FETCH_REQUEST" });
           const { data } = await Axios.post(
-            "http://localhost:5000/user/sign-up",
+            "https://expense-tracker-two-alpha.vercel.app/user/sign-up",
             {
               name,
               email,
