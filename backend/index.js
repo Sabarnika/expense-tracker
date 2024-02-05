@@ -23,6 +23,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+app.get("/",(req,res)=>
+  {
+    res.json("Hello");
+  })
 app.options("*", cors(corsOptions));
 app.use("/user",userRouter);
 app.use("/expense-tracker", expenseRouter);
