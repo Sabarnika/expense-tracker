@@ -13,6 +13,7 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
+console.log("HI");
 app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URL)
