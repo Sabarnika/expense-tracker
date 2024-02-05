@@ -6,7 +6,10 @@ const expenseRouter = require("./expenseRouter");
 const userRouter = require("./userRouter");
 const app = express();
 dotenv.config();
-app.use(cors();
+app.use(cors({
+  origin: 'https://expense-tracker-mern-stack.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+}));
 app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URL)
