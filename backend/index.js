@@ -22,6 +22,7 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+app.options("*", cors(corsOptions));
 app.use("/user",userRouter);
 app.use("/expense-tracker", expenseRouter);
 const PORT = process.env.PORT || 5000;
