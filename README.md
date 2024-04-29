@@ -1,5 +1,5 @@
 ## Problem Statement
- n today's world, many people find themselves spending money without a clear understanding of where it's going. 
+ In today's world, many people find themselves spending money without a clear understanding of where it's going. 
  Whether it's small daily expenses or larger purchases, keeping track of expenditures can be challenging and often leads to financial stress and uncertainty
 
  ## Solution
